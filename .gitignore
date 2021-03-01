@@ -1,0 +1,6 @@
+### JetBrains files
+.idea/
+
+### Project specific stuff:
+/secrets.yml
+/bootstrap.retry
