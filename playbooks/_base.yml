@@ -1,0 +1,9 @@
+---
+- name: update APT package cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: upgrade APT to the latest packages
+  apt: upgrade=safe
+
+- name: install required packages
+  apt: state=present pkg={{ DEFAULT_PACKAGES }}
