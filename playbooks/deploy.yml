@@ -1,0 +1,18 @@
+---
+- name: "deploy: create user"
+  user:
+    name: "{{ DEPLOY_USERNAME }}"
+    password: "{{ DEPLOY_PASSWORD | password_hash('sha512') }}"
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: yes
+  when: deploy_username != ''
+
+- name: "deploy: add authorized keys for deploy user"
+  authorized_key: user={{ DEPLOY_USERNAME }} key="{{ lookup('file', item) }}"
+  with_items: "{{ PUBLIC_KEYS }}"
+  when: deploy_username != ''
+
+# groups: admins,developers
+# append: yes
