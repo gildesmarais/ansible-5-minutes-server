@@ -4,3 +4,5 @@
 ### Project specific stuff:
 /secrets.yml
 /bootstrap.retry
+
+.vagrant/

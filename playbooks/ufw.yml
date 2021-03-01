@@ -1,0 +1,6 @@
+---
+- name: setup ufw
+  ufw: state=enabled
+
+- name: allow ssh traffic
+  ufw: rule=allow port=22 proto=tcp

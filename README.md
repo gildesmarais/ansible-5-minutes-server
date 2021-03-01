@@ -1,8 +1,6 @@
-# Ansible: My First 5 Minutes On A Server
+# ansible-5-minutes-server
 
 This ansible playbook sets up what's described in the article ["My First 5 Minutes On A Server; Or, Essential Security for Linux Servers"](https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers).
-
-This repository is based in [guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server). Furthermore it contains several changes suggest in [PR#1 of that repository](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server/pull/1) by [@joraman](https://github.com/joraman).
 
 The ansible scripts should work with the Ubuntu linux distribution and have a hard dependency on that.
 
@@ -17,10 +15,13 @@ TL;DR:
 - setup firewall
 - disallow password authentication
 - disallow root SSH access
+- setup periodic unattended-upgrades with automatic reboots
 
 To allow ansible to work, you might need to manually
 `apt install python-minimal python-zipstream`
 on the remote server.
+
+This repository is based in [guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server). Furthermore it contains several changes suggested in [PR#1 of that repository](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server/pull/1) by [@joraman](https://github.com/joraman).
 
 ## Getting started
 
@@ -105,6 +106,7 @@ The encrypted information that you can change:
 ROOT_PASSWORD: "xxxxxx"
 ADMIN_PASSWORD: "xxxxxx"
 ADMIN_USERNAME: admin
+ADMIN_EMAIL: "an_existing@email.address"
 PUBLIC_KEYS:
   - ~/.ssh/id_rsa.pub
 #EXTRA_PACKAGES:
@@ -131,9 +133,7 @@ ansible-playbook --user=pi --private-key=~/.ssh/id_rsa --ask-become-pass --ask-v
 Install [vagrant](https://www.vagrantup.com/docs/installation).
 
 ```
-cd test
 vagrant up
-cd ..
 ansible-playbook -i test/test_inventory --ask-vault-pasbootstrap_roles.yml
 ```
 
@@ -163,6 +163,7 @@ Host ubuntu20
   Hostname 10.0.1.2
   User vagrant
   IdentityFile ~/.ssh/id_rsa
+  StrictHostKeyChecking no
 ```
 
 ## FAQ

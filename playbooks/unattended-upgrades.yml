@@ -1,0 +1,22 @@
+---
+- name: "unattended-upgrades: install package"
+  apt: state=present pkg=unattended-upgrades
+
+- name: "unattended-upgrades: enable periodic updates"
+  template:
+    src: apt/10periodic.j2
+    dest: /etc/apt/apt.conf.d/10periodic
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "unattended-upgrades: configure"
+  template:
+    src: apt/50unattended-upgrades.j2
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "unattended-upgrades: dry run"
+  ansible.builtin.shell: "unattended-upgrade --dry-run --verbose"
