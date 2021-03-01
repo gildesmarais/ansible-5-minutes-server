@@ -3,11 +3,6 @@
   become: yes
   become_user: root
 
-  vars:
-    DEFAULT_PACKAGES:
-      - ufw
-      - fail2ban
-
   tasks:
     - include_vars: secrets.yml
     - include: playbooks/_base.yml
@@ -15,10 +10,11 @@
     - include: playbooks/ufw.yml
     - include: playbooks/ssh.yml
     - include: playbooks/unattended-upgrades.yml
-
-    - name: install extra packages defined in secrets.yml
-      apt: state=present pkg={{ EXTRA_PACKAGES|default([]) }}
+    - include: playbooks/fail2ban.yml
+    - include: playbooks/apt_extra_packages.yml
 
   handlers:
     - name: restart ssh
       service: name=ssh state=restarted
+    - name: restart fail2ban
+      service: name=fail2ban state=restarted

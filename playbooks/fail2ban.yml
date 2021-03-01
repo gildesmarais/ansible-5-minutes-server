@@ -1,0 +1,9 @@
+---
+- name: "fail2ban: install package"
+  apt: state=present pkg=fail2ban
+
+- name: "fail2ban: enable system service and ensure it's started"
+  systemd:
+    name: fail2ban
+    enabled: yes
+    state: started
