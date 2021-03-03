@@ -7,17 +7,21 @@ The ansible scripts should work with the Ubuntu linux distribution and have a ha
 TL;DR:
 
 - change the root password
-- add an admin user (name is your choice)
+- add an admin user (username of your choice)
 - add your public key to .ssh/authorized_keys for the admin user
 - add that admin user to /etc/sudoers
-- install default packages (ufw, fail2ban, ...)
-- install user extra packages
-- setup firewall
-- disallow password authentication
-- disallow root SSH access
-- setup periodic unattended-upgrades with automatic reboots
+- install [ufw](https://launchpad.net/ufw) (uncomplicated firewall, an iptables frontend) and [fail2ban](https://www.fail2ban.org/)
+- SSH: disallow password authentication
+- SSH: disallow root login
+- setup firewall (ufw) to allow SSH traffic
+- install additional apt packages provided by the user
+- add a "deploy" user (username of your choice)
+- setup periodic [unattended-upgrades](https://wiki.debian.org/UnattendedUpgrades) with automatic reboots
+- setup [sSMTP](https://wiki.debian.org/sSMTP) to send (system) mails via SMTP
+- create a 1GB file at `/swapfile` and swap on it
+- set sysctl `vm.swappiness = 15`
 
-To allow ansible to work, you might need to manually
+To allow ansible to work on older Ubuntu versions, you might need to manually
 `apt install python-minimal python-zipstream`
 on the remote server.
 
