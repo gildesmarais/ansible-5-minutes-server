@@ -7,12 +7,9 @@
     shell: /bin/bash
     system: no
     createhome: yes
-  when: deploy_username != ''
+  when: deploy_username != None
 
 - name: "deploy: add authorized keys for deploy user"
   authorized_key: user={{ DEPLOY_USERNAME }} key="{{ lookup('file', item) }}"
   with_items: "{{ PUBLIC_KEYS }}"
-  when: deploy_username != ''
-
-# groups: admins,developers
-# append: yes
+  when: deploy_username != None
