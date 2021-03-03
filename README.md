@@ -36,7 +36,7 @@ ansible-vault edit secrets.yml
 Run (replace `<SUDOER>`, `<SSH_PRIVATE_KEY>`, `<IP>`)
 
 ```
-ansible-playbook -u <SUDOER> --private-key=<SSH_PRIVATE_KEY> --ask-become-pass  --ask-vault-pass -i '<IP>,' bootstrap.yml
+ansible-playbook -u <SUDOER> --private-key=<SSH_PRIVATE_KEY> --ask-become-pass --ask-vault-pass -i '<IP>,' bootstrap.yml
 ```
 
 ## Requirements
@@ -99,21 +99,6 @@ Edit secrets information
 ansible-vault edit secrets.yml
 ```
 
-The encrypted information that you can change:
-
-```yml
----
-ROOT_PASSWORD: "xxxxxx"
-ADMIN_PASSWORD: "xxxxxx"
-ADMIN_USERNAME: admin
-ADMIN_EMAIL: "an_existing@email.address"
-PUBLIC_KEYS:
-  - ~/.ssh/id_rsa.pub
-#EXTRA_PACKAGES:
-#  - vim
-#  - htop
-```
-
 ## Setup your server
 
 Now run `bootstrap.yml`
@@ -145,7 +130,7 @@ For instance the Ubuntu 20.04 "focal":
 
 ```
 vagrant up ubuntu20
-ansible-playbook -u vagrant --private-key=~/.ssh/id_rsa.pub --ask-become-pass  --ask-vault-pass -i 'ubuntu20,' bootstrap.yml
+ansible-playbook -u vagrant --private-key=~/.ssh/id_rsa.pub --ask-vault-pass -i 'ubuntu20,' bootstrap.yml
 ```
 
 When done, destroy the machine to start with a blank slate on the next run:
