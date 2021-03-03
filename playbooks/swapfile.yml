@@ -35,8 +35,8 @@
 
 - name: "swapfile: /etc/sysctl.d/10vm.conf"
   template:
-    src: swapfile/10vm.conf.j2
-    dest: /etc/sysctl.d/10vm.conf
+    src: swapfile/10-vm.conf.j2
+    dest: /etc/sysctl.d/10-vm.conf
     owner: root
     group: root
     mode: 0644
