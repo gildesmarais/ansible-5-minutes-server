@@ -2,7 +2,8 @@
 .idea/
 
 ### Project specific stuff:
-/secrets.yml
+/secrets*.yml
+!/secrets.default
 /bootstrap.retry
 
 .vagrant/

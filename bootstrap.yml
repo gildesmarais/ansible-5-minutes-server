@@ -16,6 +16,7 @@
     - include: playbooks/fail2ban.yml
     - include: playbooks/apt_extra_packages.yml
     - include: playbooks/deploy.yml
+    - include: playbooks/ssmtp.yml
 
   handlers:
     - name: restart ssh
