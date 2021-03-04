@@ -2,25 +2,5 @@
 - hosts: all
   become: yes
   become_user: root
-
-  vars:
-    deploy_username: "{{ DEPLOY_USERNAME }}"
-
-  tasks:
-    - include_vars: secrets.yml
-    - include: playbooks/_base.yml
-    - include: playbooks/admin.yml
-    - include: playbooks/ufw.yml
-    - include: playbooks/ssh.yml
-    - include: playbooks/unattended-upgrades.yml
-    - include: playbooks/fail2ban.yml
-    - include: playbooks/apt_extra_packages.yml
-    - include: playbooks/deploy.yml
-    - include: playbooks/ssmtp.yml
-    - include: playbooks/swapfile.yml
-
-  handlers:
-    - name: restart ssh
-      service: name=ssh state=restarted
-    - name: restart fail2ban
-      service: name=fail2ban state=restarted
+  roles:
+    - bootstrap
