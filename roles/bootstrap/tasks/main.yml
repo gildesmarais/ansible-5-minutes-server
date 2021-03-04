@@ -1,5 +1,10 @@
 ---
 - include_vars: secrets.yml
+
+- name: Asserting distribution is Ubuntu
+  fail: msg="Not Ubuntu, aborting"
+  when: ansible_distribution != "Ubuntu"
+
 - include: ./swapfile.yml
 - include: ./apt.yml
 - include: ./admin.yml
