@@ -8,7 +8,7 @@ The ansible scripts should work with the Ubuntu linux distribution and have a ha
 
 1. Edit personal information in `secrets.yml` with [`ansible-vault`](https://docs.ansible.com/ansible/latest/user_guide/vault.html) (default password: **password**)
    ```
-   mv secrets.default secrets.yml
+   cp secrets.default secrets.yml
    ansible-vault rekey secrets.yml
    ansible-vault edit secrets.yml
    ```
@@ -17,7 +17,7 @@ The ansible scripts should work with the Ubuntu linux distribution and have a ha
    [groupname]
    server.ip.or.hostname
    ```
-   `[groupname]` can be anything to your liking. You can have multiple groups.
+   `[groupname]` can be omitted or altered to anything to your liking. You can have multiple groups. [Read more on the inventory.](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html)
 3. Run (replace `<SUDOER>` with the login name)
    ```
    ansible-playbook -u <SUDOER> --private-key=~/.ssh/id_rsa.pub --ask-become-pass --ask-vault-pass --inventory-file=inventory playbook.yml
@@ -87,24 +87,6 @@ ubuntu20 node_version=15.x
 ```
 
 See `playbook.yml` to see how it's mapped.
-
-## Modify personal information
-
-All your personal information is stored in an encrypted file with `ansible-vault`.
-
-1. Move `secrets.default` to `secrets.yml`
-   ```
-   mv secrets.default secrets.yml
-   ```
-2. Change your vault password (existing password: **password**)
-   ```
-   ansible-vault rekey secrets.yml
-   ```
-   Follow the instructions to change the password.
-3. Edit secrets information
-   ```
-   ansible-vault edit secrets.yml
-   ```
 
 ## Testing locally
 
