@@ -27,11 +27,20 @@
 
 - name: "swapfile: mkswap /swapfile when not mounted"
   ansible.builtin.command: "mkswap /swapfile"
-  when: swapon.rc != 0
+  when: swapon.rc == 1
 
 - name: "swapfile: swapon /swapfile when not mounted"
   ansible.builtin.command: "swapon /swapfile"
-  when: swapon.rc != 0
+  when: swapon.rc == 1
+
+- name: "swapfile: added to /etc/fstab?"
+  ansible.builtin.shell: "grep \/swapfile /etc/fstab"
+  register: fstab
+  failed_when: fstab.rc > 1
+
+- name: "swapfile: add to /etc/fstab when absent"
+  ansible.builtin.shell: 'echo "/swapfile none swap sw 0 0" >> /etc/fstab'
+  when: fstab.rc == 1
 
 - name: "swapfile: /etc/sysctl.d/10vm.conf"
   template:
@@ -42,4 +51,4 @@
     mode: 0644
 
 - name: "swapfile: apply sysctl settings"
-  ansible.builtin.command: "sysctl -p"
+  ansible.builtin.command: "sysctl -p /etc/sysctl.d/10-vm.conf"
