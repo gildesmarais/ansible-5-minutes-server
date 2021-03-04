@@ -6,6 +6,7 @@
 - include: ./ufw.yml
 - include: ./ssh.yml
 - include: ./ssmtp.yml
+- include: ./snoopy.yml
 - include: ./fail2ban.yml
 - include: ./unattended-upgrades.yml
 - include: ./apt_extra_packages.yml

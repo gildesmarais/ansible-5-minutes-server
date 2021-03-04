@@ -1,0 +1,19 @@
+---
+- name: "snoopy: install package"
+  apt: state=present pkg=snoopy
+
+- name: "snoopy: add config"
+  template:
+    src: snoopy/snoopy.ini.j2
+    dest: /etc/snoopy.ini
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "snoopy: setup log rotation"
+  template:
+    src: snoopy/snoopy.logrotate.j2
+    dest: /etc/logrotate.d/snoopy
+    owner: root
+    group: root
+    mode: 0644
