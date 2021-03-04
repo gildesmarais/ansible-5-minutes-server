@@ -1,8 +1,8 @@
 # ansible-5-minutes-server
 
-This ansible playbook sets up what's described in the article ["My First 5 Minutes On A Server; Or, Essential Security for Linux Servers"](https://web.archive.org/web/20201112012219/https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers).
+This ansible playbook sets up what's described in the article ["My First 5 Minutes On A Server; Or, Essential Security for Linux Servers"](https://web.archive.org/web/20201112012219/https://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers) and event extends it out of necessity.
 
-The ansible scripts should work with the Ubuntu linux distribution and have a hard dependency on that.
+The ansible scripts are tested with Ubuntu 20.04 LTS. They should work with any recent Ubuntu releases.
 
 ## Getting started
 
@@ -41,6 +41,7 @@ This is the baseline for every server and the initial reason these scripts exist
 - setup firewall to allow SSH traffic
 - install additional apt packages provided by the user
 - add a "deploy" user (username of your choice) _without sudo_ usage permission
+- add your public key to the authorized keys of the deploy user
 - setup periodic [unattended-upgrades](https://wiki.debian.org/UnattendedUpgrades) with automatic reboots
 - setup [sSMTP](https://wiki.debian.org/sSMTP) to send (system) mails via SMTP
 - create a 1GB file at `/swapfile` and swap on it

@@ -1,6 +1,4 @@
 ---
-- debug: msg="admin username {{ ADMIN_USERNAME }}"
-
 - name: "admin: add admin user"
   user: name={{ ADMIN_USERNAME }} password={{ ADMIN_PASSWORD | password_hash('sha512') }} shell=/bin/bash
 
@@ -35,4 +33,4 @@
 - name: "admin: remove world-readable permissions from home directory"
   ansible.builtin.file:
     path: "/home/{{ADMIN_USERNAME}}"
-    mode: '0750'
+    mode: "0750"

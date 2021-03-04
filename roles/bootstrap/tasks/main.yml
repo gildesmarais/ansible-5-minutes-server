@@ -10,4 +10,3 @@
 - include: ./unattended-upgrades.yml
 - include: ./apt_extra_packages.yml
 - include: ./deploy.yml
-
