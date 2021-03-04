@@ -13,3 +13,9 @@
   authorized_key: user={{ DEPLOY_USERNAME }} key="{{ lookup('file', item) }}"
   with_items: "{{ PUBLIC_KEYS }}"
   when: deploy_username != None
+
+- name: "deploy: remove world-readable permissions from home directory"
+  ansible.builtin.file:
+    path: "/home/{{DEPLOY_USERNAME}}"
+    mode: '0750'
+  when: deploy_username != None

@@ -31,3 +31,8 @@
     owner: root
     group: root
     validate: "/usr/sbin/visudo -cf %s"
+
+- name: "admin: remove world-readable permissions from home directory"
+  ansible.builtin.file:
+    path: "/home/{{ADMIN_USERNAME}}"
+    mode: '0750'
