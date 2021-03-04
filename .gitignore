@@ -7,5 +7,5 @@
 /bootstrap.retry
 
 .vagrant/
-inventory/
+inventory/**/*
 !inventory/test
