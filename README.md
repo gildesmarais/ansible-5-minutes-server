@@ -54,12 +54,12 @@ If you choose to apply this role to a host, it will:
 
 - set up [rvm](https://rvm.io/) via the [dedicated ubuntu deb package](https://github.com/rvm/ubuntu_rvm).
 - install required dependencies to install ruby via apt.
-- install the specified ruby version for the deploy user.
+- install the specified `ruby_version` for the deploy user.
 
 Example inventory:
 
 ```
-[ruby]
+[ruby-rvm]
 ubuntu20 ruby_version=2.7.2
 ```
 
