@@ -23,3 +23,26 @@
 
 - name: "nodesource-nodejs: install package"
   apt: state=present pkg=nodejs
+
+- name: "nodesource-nodejs: create ~/.npm-global for deploy user"
+  file:
+    path: "/home/{{DEPLOY_USERNAME}}/.npm-global"
+    owner: "{{DEPLOY_USERNAME}}"
+    group: "{{DEPLOY_USERNAME}}"
+    mode: 0700
+    state: directory
+
+# To avoid permission errors, configure NPM to install global packages to current user's dir.
+# https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+
+- name: "nodesource-nodejs: configure npm to install global packages in home dir"
+  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} npm config set prefix '~/.npm-global'"
+
+- name: "nodesource-nodejs: check if npm-global/bin dir is added to pah"
+  ansible.builtin.shell: "grep 'export PATH=~/.npm-global/bin' /home/{{DEPLOY_USERNAME}}/.profile"
+  register: profile
+  failed_when: profile.rc > 1
+
+- name: "nodesource-nodejs: append npm-global/bin dir when not added"
+  ansible.builtin.shell: "echo 'export PATH=~/.npm-global/bin:$PATH' >> /home/{{DEPLOY_USERNAME}}/.profile"
+  when: profile.rc == 1
