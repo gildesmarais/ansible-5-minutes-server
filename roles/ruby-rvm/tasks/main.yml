@@ -1,0 +1,41 @@
+---
+- include_vars: secrets.yml
+
+- name: "ruby-rvm: add apt repository"
+  ansible.builtin.apt_repository:
+    repo: ppa:rael-gc/rvm
+
+- name: "ruby-rvm: update APT package cache"
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: "ruby-rvm: install package"
+  apt: state=present pkg=rvm
+
+- name: "ruby-rvm: add deploy user to rvm group"
+  user:
+    name: "{{ DEPLOY_USERNAME }}"
+    groups: rvm
+    append: yes
+
+# There doesn't seem to be an official way by ansible to
+# execute shell commands on a login shell of another user.
+# This triggers a warning.
+- name: "ruby-rvm: as deploy user: rvm user gemsets"
+  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm user gemsets"
+
+- name: "ruby-rvm: install required libraries with apt"
+  apt:
+    state: present
+    pkg:
+      - libncurses5-dev
+      - libgmp-dev
+      - libssl-dev
+
+- name: "ruby-rvm: as deploy user: disable rvm autolibs"
+  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm autolibs read-fail"
+
+- name: "ruby-rvm: as deploy user: rvm install {{ruby_version}}"
+  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm install {{ruby_version}}"
+
+- name: "ruby-rvm: as deploy user: rvm set default ruby to {{ruby_version}}"
+  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm --default use {{ruby_version}}"

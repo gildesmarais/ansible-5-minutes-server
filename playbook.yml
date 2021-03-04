@@ -4,3 +4,9 @@
   become_user: root
   roles:
     - bootstrap
+
+- hosts: ruby-rvm
+  become: yes
+  become_user: root
+  roles:
+    - ruby-rvm
