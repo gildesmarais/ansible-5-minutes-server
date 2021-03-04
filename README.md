@@ -72,7 +72,12 @@ If you choose to apply this role to a host, it will:
 - adds the [nodesource apt repository](https://github.com/nodesource/distributions)
 - install the specified `node_version`
 
-See https://github.com/nodesource/distributions#deb for available version. Specify `node_version` like one of this: - 15.x - 14.x - 12.x - etc.
+Check [the README of the Nodesource git repository](https://github.com/nodesource/distributions#deb) for available version. Specify `node_version` like one of this:
+
+- `15.x`
+- `14.x`
+- `12.x`
+- etc.
 
 Example inventory:
 
