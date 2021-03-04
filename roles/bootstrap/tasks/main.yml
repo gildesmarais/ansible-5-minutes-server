@@ -1,13 +1,13 @@
 ---
 - include_vars: secrets.yml
-- include: bootstrap/tasks/swapfile.yml
-- include: bootstrap/tasks/apt.yml
-- include: bootstrap/tasks/admin.yml
-- include: bootstrap/tasks/ufw.yml
-- include: bootstrap/tasks/ssh.yml
-- include: bootstrap/tasks/ssmtp.yml
-- include: bootstrap/tasks/fail2ban.yml
-- include: bootstrap/tasks/unattended-upgrades.yml
-- include: bootstrap/tasks/apt_extra_packages.yml
-- include: bootstrap/tasks/deploy.yml
+- include: ./swapfile.yml
+- include: ./apt.yml
+- include: ./admin.yml
+- include: ./ufw.yml
+- include: ./ssh.yml
+- include: ./ssmtp.yml
+- include: ./fail2ban.yml
+- include: ./unattended-upgrades.yml
+- include: ./apt_extra_packages.yml
+- include: ./deploy.yml
 
