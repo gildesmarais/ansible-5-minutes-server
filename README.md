@@ -39,7 +39,7 @@ This repository is based in [guillaumevincent/Ansible-My-First-5-Minutes-On-A-Se
    `[groupname]` can be anything to your liking. You can have multiple groups.
 3. Run (replace `<SUDOER>` with the login name)
    ```
-   ansible-playbook -u <SUDOER> --private-key=~/.ssh/id_rsa.pub --ask-become-pass --ask-vault-pass --inventory-file=inventory bootstrap.yml
+   ansible-playbook -u <SUDOER> --private-key=~/.ssh/id_rsa.pub --ask-become-pass --ask-vault-pass --inventory-file=inventory playbook.yml
    ```
 
 Your server is now bootstrapped.
@@ -68,7 +68,7 @@ Install [vagrant](https://www.vagrantup.com/docs/installation).
 
 ```
 vagrant up
-ansible-playbook -i inventory/test --ask-vault-pass bootstrap.yml
+ansible-playbook -i inventory/test --ask-vault-pass playbook.yml
 ```
 
 These vagrant boxes are publicly officially available, not something custom made. The first run of `vagrant up` can take a a long time to set everything up.
@@ -93,7 +93,7 @@ For instance the `ubuntu20`:
 
 ```
 vagrant up ubuntu20
-ansible-playbook -u vagrant --private-key=~/.ssh/id_rsa.pub --ask-vault-pass -i 'ubuntu20,' bootstrap.yml
+ansible-playbook -u vagrant --private-key=~/.ssh/id_rsa.pub --ask-vault-pass -i 'ubuntu20,' playbook.yml
 ```
 
 When done, destroy the machine to start with a blank slate on the next run:
@@ -119,7 +119,7 @@ ansible all --user=vagrant --private-key=~/.ssh/id_rsa --inventory-file=inventor
 ```
 
 ```
-192.168.1.100 | SUCCESS => {
+unbunt20 | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
