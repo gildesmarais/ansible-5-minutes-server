@@ -1,0 +1,25 @@
+---
+- include_vars: secrets.yml
+
+- name: "nodesource-nodejs: add Apt signing key"
+  apt_key:
+    url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    state: present
+
+- name: "nodesource-nodejs: get distro code name"
+  ansible.builtin.command: "lsb_release -s -c"
+  register: distro
+
+- name: "nodesource-nodejs: add apt repository"
+  ansible.builtin.apt_repository:
+    state: present
+    repo: "{{item}}"
+  with_items:
+    - "deb https://deb.nodesource.com/node_{{node_version}} {{distro.stdout}} main"
+    - "deb-src https://deb.nodesource.com/node_{{node_version}} {{distro.stdout}} main"
+
+- name: "nodesource-nodejs: update APT package cache"
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: "nodesource-nodejs: install package"
+  apt: state=present pkg=nodejs

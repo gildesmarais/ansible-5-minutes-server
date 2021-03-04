@@ -5,8 +5,14 @@
   roles:
     - bootstrap
 
-- hosts: ruby-rvm
+- hosts: ruby_rvm
   become: yes
   become_user: root
   roles:
     - ruby-rvm
+
+- hosts: nodesource_nodejs
+  become: yes
+  become_user: root
+  roles:
+    - nodesource-nodejs

@@ -1,2 +1,5 @@
-[ruby-rvm]
+[ruby_rvm]
 ubuntu20 ruby_version=2.7.2
+
+[nodesource_nodejs]
+ubuntu20 node_version=12.x
