@@ -18,7 +18,8 @@ The ansible scripts are tested with Ubuntu 20.04 LTS. They should work with any 
    server.ip.or.hostname
    ```
    `[groupname]` can be omitted or altered to anything to your liking. You can have multiple groups. [Read more on the inventory.](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html)
-3. Run (replace `<SUDOER>` with the login name)
+3. Run `ansible-galaxy install -r requirements.yml` to install the dependencies.
+4. Run (replace `<SUDOER>` with the login name)
    ```
    ansible-playbook -u <SUDOER> --private-key=~/.ssh/id_rsa.pub --ask-become-pass --ask-vault-pass --inventory-file=inventory playbook.yml
    ```

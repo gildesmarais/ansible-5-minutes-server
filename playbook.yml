@@ -16,3 +16,8 @@
   become_user: root
   roles:
     - nodesource-nodejs
+
+- hosts: postgresql
+  become: yes
+  roles:
+    - geerlingguy.postgresql

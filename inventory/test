@@ -1,5 +1,23 @@
-[ruby_rvm]
-ubuntu20 ruby_version=2.7.2
+---
+all:
+  hosts:
+    ubuntu20:
+  children:
+    nodesource_nodejs:
+      hosts:
+        ubuntu20:
+          node_version: 12.x
 
-[nodesource_nodejs]
-ubuntu20 node_version=12.x
+    ruby_rvm:
+      hosts:
+        ubuntu20:
+          ruby_version: 2.7.2
+
+    postgresql:
+      hosts:
+        ubuntu20:
+          postgresql_databases:
+            - name: example
+          postgresql_users:
+            - name: example
+              password: example
