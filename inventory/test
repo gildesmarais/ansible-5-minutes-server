@@ -27,3 +27,8 @@ all:
     redis:
       hosts:
         ubuntu20:
+
+    # See https://github.com/geerlingguy/ansible-role-memcached for options and variables
+    memcache:
+      hosts:
+        ubuntu20:

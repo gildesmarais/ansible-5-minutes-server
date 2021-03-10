@@ -2,3 +2,4 @@
 roles:
   - name: geerlingguy.postgresql
   - name: geerlingguy.redis
+  - name: geerlingguy.memcached

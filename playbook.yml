@@ -26,3 +26,8 @@
   become: yes
   roles:
     - geerlingguy.redis
+
+- hosts: memcache
+  become: yes
+  roles:
+    - geerlingguy.memcached
