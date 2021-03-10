@@ -21,3 +21,8 @@
   become: yes
   roles:
     - geerlingguy.postgresql
+
+- hosts: redis
+  become: yes
+  roles:
+    - geerlingguy.redis

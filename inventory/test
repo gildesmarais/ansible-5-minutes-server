@@ -13,6 +13,7 @@ all:
         ubuntu20:
           ruby_version: 2.7.2
 
+    # See https://github.com/geerlingguy/ansible-role-postgresql for options and variables
     postgresql:
       hosts:
         ubuntu20:
@@ -21,3 +22,8 @@ all:
           postgresql_users:
             - name: example
               password: example
+
+    # See https://github.com/geerlingguy/ansible-role-redis for options and variables
+    redis:
+      hosts:
+        ubuntu20:
