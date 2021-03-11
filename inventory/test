@@ -32,3 +32,12 @@ all:
     memcache:
       hosts:
         ubuntu20:
+
+    # See
+    #
+    # - https://github.com/nginxinc/ansible-role-nginx
+    #
+    # for options and variables.
+    nginx:
+      hosts:
+        ubuntu20:

@@ -1,0 +1,13 @@
+---
+- name: "nginx-ufw: upload application profile"
+  template:
+    src: nginx.j2
+    dest: "/etc/ufw/applications.d/nginx"
+    mode: 0400
+    owner: root
+    group: root
+
+- name: "nginx-ufw: enable NGINX Full application profile"
+  ufw:
+    rule: allow
+    name: Nginx Full

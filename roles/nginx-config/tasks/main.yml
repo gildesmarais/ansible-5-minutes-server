@@ -1,0 +1,17 @@
+---
+- name: "nginx-config: upload status.conf"
+  template:
+    src: status.conf.j2
+    dest: "/etc/nginx/conf.d/status.conf"
+    mode: 0622
+    owner: root
+    group: root
+
+- name: "nginx-config: upload nginx.conf"
+  template:
+    src: nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+    mode: 0622
+    owner: root
+    group: root
+  notify: restart nginx

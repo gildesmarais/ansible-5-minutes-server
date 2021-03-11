@@ -31,3 +31,10 @@
   become: yes
   roles:
     - geerlingguy.memcached
+
+- hosts: nginx
+  become: yes
+  roles:
+    - nginxinc.nginx
+    - nginx-config
+    - nginx-ufw
