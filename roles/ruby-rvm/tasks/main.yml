@@ -1,5 +1,6 @@
 ---
-- include_vars: secrets.yml
+- name: include secrets
+  include_vars: secrets.yml
 
 - name: "ruby-rvm: add apt repository"
   ansible.builtin.apt_repository:
@@ -21,7 +22,7 @@
 # execute shell commands on a login shell of another user.
 # This triggers a warning.
 - name: "ruby-rvm: as deploy user: rvm user gemsets"
-  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm user gemsets"
+  ansible.builtin.shell: "sudo -iu {{ DEPLOY_USERNAME }} rvm user gemsets"
 
 - name: "ruby-rvm: install required libraries with apt"
   apt:
@@ -32,10 +33,10 @@
       - libssl-dev
 
 - name: "ruby-rvm: as deploy user: disable rvm autolibs"
-  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm autolibs read-fail"
+  ansible.builtin.shell: "sudo -iu {{ DEPLOY_USERNAME }} rvm autolibs read-fail"
 
-- name: "ruby-rvm: as deploy user: rvm install {{ruby_version}}"
-  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm install {{ruby_version}}"
+- name: "ruby-rvm: as deploy user: rvm install {{ ruby_version }}"
+  ansible.builtin.shell: "sudo -iu {{ DEPLOY_USERNAME }} rvm install {{ ruby_version }}"
 
-- name: "ruby-rvm: as deploy user: rvm set default ruby to {{ruby_version}}"
-  ansible.builtin.shell: "sudo -iu {{DEPLOY_USERNAME}} rvm --default use {{ruby_version}}"
+- name: "ruby-rvm: as deploy user: rvm set default ruby to {{ ruby_version }}"
+  ansible.builtin.shell: "sudo -iu {{ DEPLOY_USERNAME }} rvm --default use {{ ruby_version }}"

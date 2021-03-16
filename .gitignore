@@ -9,3 +9,4 @@
 .vagrant/
 inventory/**/*
 !inventory/test
+.cache/
