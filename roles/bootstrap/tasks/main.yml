@@ -1,7 +1,8 @@
 ---
-- include_vars: secrets.yml
+- name: 'bootstrap: include secrets'
+  include_vars: secrets.yml
 
-- name: Asserting distribution is Ubuntu
+- name: 'bootstrap: assert distribution is Ubuntu'
   fail: msg="Not Ubuntu, aborting"
   when: ansible_distribution != "Ubuntu"
 
