@@ -3,6 +3,12 @@ all:
   hosts:
     ubuntu20:
   children:
+    apt_extra_packages:
+      hosts:
+        ubuntu20:
+          apt_packages:
+            - cowsay
+
     nodesource_nodejs:
       hosts:
         ubuntu20:

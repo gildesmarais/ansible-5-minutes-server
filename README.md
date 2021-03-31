@@ -30,7 +30,7 @@ Your server is now bootstrapped.
 
 ## Included roles
 
-### `bootstrap`
+### bootstrap
 
 This is the baseline for every server and the initial reason these scripts exist.
 
@@ -51,6 +51,10 @@ This is the baseline for every server and the initial reason these scripts exist
 - set sysctl `vm.swappiness = 0`
 
 This repository is based in [guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server). Furthermore it contains several changes suggested in [PR#1 of that repository](https://github.com/guillaumevincent/Ansible-My-First-5-Minutes-On-A-Server/pull/1) by [@joraman](https://github.com/joraman).
+
+### apt-extra-packages
+
+Installs apt packages defined for that host.
 
 ### ruby-rvm
 

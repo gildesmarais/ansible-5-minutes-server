@@ -38,3 +38,8 @@
     - nginxinc.nginx
     - nginx-config
     - nginx-ufw
+
+- hosts: apt_extra_packages
+  become: yes
+  roles:
+    - apt-extra-packages
