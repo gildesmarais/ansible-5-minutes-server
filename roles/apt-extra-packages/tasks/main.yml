@@ -1,0 +1,3 @@
+---
+- name: "apt-extra-packages: install packages"
+  apt: state=present pkg={{ apt_packages|default([]) }}
