@@ -14,8 +14,8 @@
   with_items: "{{ PUBLIC_KEYS }}"
   when: deploy_username != None
 
-- name: "deploy: remove world-readable permissions from home directory"
+- name: "deploy: set world-readable permissions for home directory"
   ansible.builtin.file:
     path: "/home/{{ DEPLOY_USERNAME }}"
-    mode: "0750"
+    mode: "0755"
   when: deploy_username != None
