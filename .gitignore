@@ -8,5 +8,5 @@
 
 .vagrant/
 inventory/**/*
-!inventory/test
+!inventory/test.yml
 .cache/

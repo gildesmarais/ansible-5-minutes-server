@@ -9,20 +9,26 @@ The ansible scripts are tested with Ubuntu 20.04 LTS. They should work with any 
 ## Getting started
 
 1. Edit personal information in `secrets.yml` with [`ansible-vault`](https://docs.ansible.com/ansible/latest/user_guide/vault.html) (default password: **password**)
-   ```
+
+   ```sh
    cp secrets.default secrets.yml
    ansible-vault rekey secrets.yml
    ansible-vault edit secrets.yml
    ```
+
 2. Add your server by creating the `inventory` file with the following contents:
-   ```
+
+   ```ini
    [groupname]
    server.ip.or.hostname
    ```
+
    `[groupname]` can be omitted or altered to anything to your liking. You can have multiple groups. [Read more on the inventory.](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html)
+
 3. Run `ansible-galaxy install -r requirements.yml` to install the dependencies.
 4. Run (replace `<SUDOER>` with the login name)
-   ```
+
+   ```sh
    ansible-playbook -u <SUDOER> --private-key=~/.ssh/id_rsa.pub --ask-become-pass --ask-vault-pass --inventory-file=inventory playbook.yml
    ```
 
@@ -66,7 +72,7 @@ If you choose to apply this role to a host, it will:
 
 Example inventory:
 
-```
+```ini
 [ruby_rvm]
 ubuntu20 ruby_version=2.7.2
 ```
@@ -89,7 +95,7 @@ Check [the README of the Nodesource git repository](https://github.com/nodesourc
 
 Example inventory:
 
-```
+```ini
 [nodesource_nodejs]
 ubuntu20 node_version=15.x
 ```
@@ -100,9 +106,9 @@ See `playbook.yml` to see how it's mapped.
 
 Install [vagrant](https://www.vagrantup.com/docs/installation).
 
-```
+```sh
 vagrant up
-ansible-playbook -i inventory/test --ask-vault-pass playbook.yml
+ansible-playbook -i inventory/test.yml --ask-vault-pass playbook.yml
 ```
 
 These vagrant boxes are publicly officially available, not something custom made. The first run of `vagrant up` can take a a long time to set everything up.
@@ -125,14 +131,14 @@ Host ubuntu20
 
 For instance the `ubuntu20`:
 
-```
+```sh
 vagrant up ubuntu20
 ansible-playbook -u vagrant --private-key=~/.ssh/id_rsa.pub --ask-vault-pass -i 'ubuntu20,' playbook.yml
 ```
 
 When done, destroy the machine to start with a blank slate on the next run:
 
-```
+```sh
 vagrant destroy
 ```
 
@@ -142,17 +148,17 @@ vagrant destroy
 
 Verify that you can ping your server via SSH:
 
-```
+```sh
 ansible all --user=<SUDOER> --private-key=<SSH_PRIVATE_KEY> --inventory-file='<IP>,' -m ping
 ```
 
 Example with an `inventory` file:
 
-```
-ansible all --user=vagrant --private-key=~/.ssh/id_rsa --inventory-file=inventory/test -m ping
+```sh
+ansible all --user=vagrant --private-key=~/.ssh/id_rsa --inventory-file=inventory/test.yml -m ping
 ```
 
-```
+```haskell
 unbunt20 | SUCCESS => {
     "changed": false,
     "ping": "pong"
@@ -164,7 +170,7 @@ Explanations:
 - `ansible all` : run ansible command on all hosts.
 - `--user=vagrant` : login via ssh with user `vagrant`.
 - `--private-key=~/.ssh/id_rsa` : path of the ssh key use to connect to the server.
-- `--inventory-file=inventory/test` : specify inventory file.
+- `--inventory-file=inventory/test.yml` : specify inventory file.
 - `-m ping` : run module ping.
 
 If the ping run fails, your user doesn't have access to the machine.
@@ -174,3 +180,10 @@ If the ping run fails, your user doesn't have access to the machine.
 To allow ansible to work on older Ubuntu versions, you might need to manually
 `apt install python-minimal python-zipstream`
 on the remote server.
+
+TODOs
+
+- [ ] https://github.com/geerlingguy/ansible-role-docker
+- [ ] https://github.com/geerlingguy/ansible-role-certbot
+- [ ] https://github.com/geerlingguy/ansible-role-clamav
+- [ ] setup https://ansible-lint.readthedocs.io/en/latest/ with Github Actions
