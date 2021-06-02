@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -euo pipefail
+
+mkdir -p ~/backups
+chmod 700 ~/backups
+
+# setup variables
+db_name="{{ pg_backup_cron_database }}"
+file_name="$(date '+%Y-%m-%d_%H%M%S')_$db_name.sql.gz"
+file="$HOME/backups/$file_name"
+
+pg_dump -U postgres "$db_name" | gzip > "$file"
+
+"$HOME/bin/backup_post_dump_success.sh" "$file"

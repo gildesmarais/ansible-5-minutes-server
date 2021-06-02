@@ -1,0 +1,38 @@
+---
+- name: "call `pg_dump --version`"
+  ansible.builtin.command: "pg_dump --version"
+
+- name: "create bin/ directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: postgres
+    group: postgres
+    mode: 0700
+  with_items:
+    - /var/lib/postgresql/bin/
+    - /var/lib/postgresql/backups/
+
+- name: "upload the backup script"
+  template:
+    src: backup.sh.j2
+    dest: /var/lib/postgresql/bin/backup.sh
+    owner: postgres
+    group: postgres
+    mode: 0500
+
+- name: "upload the backup post dump success script"
+  template:
+    src: backup_post_dump_success.sh.j2
+    dest: /var/lib/postgresql/bin/backup_post_dump_success.sh
+    owner: postgres
+    group: postgres
+    mode: 0500
+
+- name: "setup cronjob as postgres user"
+  ansible.builtin.cron:
+    name: "run backup script"
+    hour: "3"
+    minute: "0"
+    user: postgres
+    job: "/var/lib/postgresql/bin/backup.sh"

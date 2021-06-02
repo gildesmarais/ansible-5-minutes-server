@@ -21,6 +21,7 @@
   become: yes
   roles:
     - geerlingguy.postgresql
+    - pg_backup_cron
 
 - hosts: redis
   become: yes
