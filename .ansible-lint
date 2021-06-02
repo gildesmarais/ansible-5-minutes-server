@@ -1,3 +1,4 @@
 warn_list:  # or 'skip_list' to silence them completely
   - no-handler  # Tasks that run when changed should likely be handlers
   - role-name  # Role name {0} does not match ``^[a-z][a-z0-9_]+$`` pattern
+  - '106'  # Role name {} does not match ``^[a-z][a-z0-9_]+$`` pattern

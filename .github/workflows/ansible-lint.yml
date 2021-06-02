@@ -12,6 +12,6 @@ jobs:
       with:
         packages: |
           ansible
-          ansible-lint
+          ansible-lint==4.3.7
     - run: ansible-lint
 
