@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+set -euo pipefail
+
+##
+# This script is called after succesful dump of the database.
+#
+# It's called with the file as first argument:
+#
+# file="$1"
+# file_name=$(basename "$file")
+
+{#
+# Setup some further actions below. E.g.:
+#
+# - encrypt the file with gpg
+# echo $GPG_PASSPHRASE | gpg --no-tty --cipher-algo aes256 --passphrase-fd 0 -ca "$file"
+#
+# - upload via scp:
+# scp "$file" backup-server:~/backups
+#
+# - ugh, do you really want to send this via mail? encrypt it first!
+# mail -s "$file_name" -a "$file.asc" someone@yourorg
+#
+# - remove file:
+# rm "$file"
+#
+# - send a healthcheck ping
+#}
+
+{% if pg_backup_cron_ping_url %}
+curl -fsS -m 10 --retry 5 -o /dev/null {{ pg_backup_cron_ping_url }}
+{% endif %}
