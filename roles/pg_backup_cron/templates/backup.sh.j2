@@ -8,7 +8,7 @@ mkdir -p ~/backups
 chmod 700 ~/backups
 
 # setup variables
-db_name="{{ pg_backup_cron_database }}"
+db_name="{{ pg_backup_cron_database | mandatory }}"
 file_name="$(date '+%Y-%m-%d_%H%M%S')_$db_name.sql.gz"
 file="$HOME/backups/$file_name"
 

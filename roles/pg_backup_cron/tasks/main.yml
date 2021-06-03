@@ -13,26 +13,21 @@
     - /var/lib/postgresql/bin/
     - /var/lib/postgresql/backups/
 
-- name: "upload the backup script"
+- name: "upload script"
   template:
-    src: backup.sh.j2
-    dest: /var/lib/postgresql/bin/backup.sh
+    src: "{{ item }}.j2"
+    dest: "/var/lib/postgresql/bin/{{ item }}"
     owner: postgres
     group: postgres
     mode: 0500
-
-- name: "upload the backup post dump success script"
-  template:
-    src: backup_post_dump_success.sh.j2
-    dest: /var/lib/postgresql/bin/backup_post_dump_success.sh
-    owner: postgres
-    group: postgres
-    mode: 0500
+  with_items:
+    - backup.sh
+    - backup_post_dump_success.sh
 
 - name: "setup cronjob as postgres user"
   ansible.builtin.cron:
     name: "run backup script"
-    hour: "3"
     minute: "0"
+    hour: "3"
     user: postgres
     job: "/var/lib/postgresql/bin/backup.sh"

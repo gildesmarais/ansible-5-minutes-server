@@ -5,13 +5,14 @@
 set -euo pipefail
 
 ##
-# This script is called after a succesful pg_dump of the database.
+# This script is called after succesful dump of the database.
 #
 # It's called with the file as first argument:
-
+#
 # file="$1"
 # file_name=$(basename "$file")
 
+{#
 # Setup some further actions below. E.g.:
 #
 # - encrypt the file with gpg
@@ -27,4 +28,8 @@ set -euo pipefail
 # rm "$file"
 #
 # - send a healthcheck ping
-# curl -fsS -m 10 --retry 5 -o /dev/null https://hc-ping.com/...
+#}
+
+{% if pg_backup_cron_ping_url %}
+curl -fsS -m 10 --retry 5 -o /dev/null {{ pg_backup_cron_ping_url }}
+{% endif %}
